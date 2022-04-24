@@ -1,10 +1,10 @@
 import './App.css';
-import Login from './Components/Authentication/Login';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 function App() {
   return (
     <div>
-      <Login></Login>
+      <Dashboard></Dashboard>
     </div>
   );
 }

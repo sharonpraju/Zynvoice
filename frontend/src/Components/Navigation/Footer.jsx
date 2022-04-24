@@ -2,11 +2,11 @@ import React from 'react'
 
 function Footer() {
   return (
-    <footer class="main-footer">
-        <div class="footer-left">
+    <footer className="main-footer">
+        <div className="footer-left">
           Developed By <a href="https://zynact.com/">Zynact Technologies</a>
         </div>
-        <div class="footer-right">
+        <div className="footer-right">
           v1.0
         </div>
     </footer>
