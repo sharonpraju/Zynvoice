@@ -6,6 +6,9 @@ Project Description
 
 ### Todo
 
+### In Progress
+
+- [ ] sign up  
 - [ ] login  
 - [ ] forgot password  
 - [ ] dashboard  
@@ -17,10 +20,6 @@ Project Description
 - [ ] previous sales  
 - [ ] Reports  
 - [ ] settings  
-
-### In Progress
-
-- [ ] sign up  
 
 ### Done ✓
 
