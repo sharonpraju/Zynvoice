@@ -7,7 +7,7 @@ var response;
 
 exports.authLoginModel = function(username, password) {
     return new Promise((resolve, reject)=>{
-        users.find({username: username, verified : true})
+        users.find({username: username})
         .then(doc => {
             bcrypt.compare(password, doc[0].password, function(err, auth) {
                 if(auth == true)

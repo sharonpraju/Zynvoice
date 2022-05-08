@@ -4,6 +4,7 @@ const app = express();
 const authRoute = require("./routes/authRoute");
 const stockRoute = require("./routes/stockRoute");
 const salesRoute = require("./routes/salesRoute");
+const settingsRoute = require("./routes/settingsRoute");
 const bodyParser = require("body-parser");;
 const db_conn = require('./db/db_conn');
 const jwt = require('jsonwebtoken');
@@ -42,5 +43,9 @@ app.use( function (req, res, next) {
 
 //stock routes
 app.use(stockRoute);
+
 //sales routes
 app.use(salesRoute);
+
+//settings routes
+app.use(settingsRoute);
