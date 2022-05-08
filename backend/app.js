@@ -30,7 +30,7 @@ app.use( function (req, res, next) {
         if (err) {
             let response = {
                 "status":"failed",
-                "message":err.message,
+                "message":err.message
             }
           res.status(403).send(response);
         }
