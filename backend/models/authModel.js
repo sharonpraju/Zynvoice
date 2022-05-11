@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const users = require('../db/schema/users');
 const jwt = require('jsonwebtoken');
+const sendmail = require('sendmail')();
 
 var response;
 
@@ -24,22 +24,22 @@ exports.authLoginModel = function(username, password) {
                         "user_id": doc[0]._id,
                         "token": token
                     }
+                    resolve(response);
                 }
                 else
                 {
                     response = {
-                        "status":"Login Failed",
+                        "status":"failed",
                         "message":"Incorrect login credentials",
                         "username": username,
                         "user_id": null
                     }
                 }
-                resolve(response);
             });
         })
         .catch(err => {
             response = {
-                "status":"Login Failed",
+                "status":"failed",
                 "message":"Incorrect login credentials",
                 "username": username,
                 "user_id": null
@@ -50,70 +50,74 @@ exports.authLoginModel = function(username, password) {
     })
 };
 
-exports.authPasswordResetModel = function(username, current_password, new_password) {
+exports.authPasswordResetModel = function(username) {
   return new Promise((resolve, reject)=>{
-      if(token == null || token == "null" || token == "" || token == "undefined")
-      {
-          response = {
-              "status":"failed",
-              "message":"Wrong Token",
-              "email": email,
-              "user_id": null
-          }
-          return reject(response);
-      }
-      else
-      {
-          users.find({email: email})
-          .then(doc => {
-              if(doc[0].token!=token)
-              {
-                  response = {
-                      "status":"failed",
-                      "message": "Wrong Token",
-                      "email": email,
-                      "user_id": null
-                  }
-                  return reject(response);
-              }
-              bcrypt.genSalt(10, function(err, salt) {
-                  bcrypt.hash(password, salt, function(err, hash) {
-                      users.updateOne(
-                        { email : email }, 
-                                    { $set: {password : hash, token : null } }
-                      )
-                      .then(doc =>{
-                          response = {
-                              "status":"success",
-                              "message":"Password Changed",
-                              "email": email,
-                              "user_id": null
-                          }
-                          resolve(response);
-                      })
-                      .catch(err =>{
-                          response = {
-                              "status":"failed",
-                              "message": err.message,
-                              "email": email,
-                              "user_id": null
-                          }
-                          console.log(err);
-                          return reject(response);
-                      });
-                  });
-              });
-          })
-          .catch(err => {
-              response = {
-                  "status":"failed",
-                  "message": err.message,
-                  "email": email,
-                  "user_id": null
-              }
-              console.log(err);
-              return reject(response);
-          })
-      }
+//     users.find({username : username})
+//     .then(user_data => {
+//         if(user_data.length > 0)
+//         {
+//             let new_password = (Math.random() + 1).toString(36).substring(4);
+//             bcrypt.genSalt(10, function(err, salt) {
+//                 bcrypt.hash(new_password, salt, function(err, hash) {
+//                     users.updateMany(
+//                         { username : username },
+//                         {
+//                           $set: {
+//                               password : hash
+//                           }
+//                         }
+//                     )
+//                     .then(doc => {
+//                             sendmail({
+//                                 from: 'support@zynact.com',
+//                                 to: user_data[0].email,
+//                                 subject: 'Zynvoice password reset.',
+//                                 html: `Dear customer please use the below code as password to login to your account.
+//                                 <br><br>
+//                                 <b>${new_password}</b>
+//                                 <br><br>
+//                                 You may change your password from the settings after you login with this temporary password.`,
+//                             },
+//                             function(err, reply) {
+//                                 console.log(err && err.stack);
+//                                 console.dir(reply);
+//                             });
+
+//                             response = {
+//                                 "status":"success",
+//                                 "message":"Please check your registered email for more instructions."
+//                             }
+//                             return resolve(response);
+//                     })
+//                     .catch(err => {
+//                         response = {
+//                             "status":"failed",
+//                             "message":"Something went wrong"
+//                         }
+//                         console.log(err);
+//                         return reject(response);
+//                     });
+//                 });
+//             });
+//         }
+//         else
+//         {
+//             response = {
+//                 "status":"failed",
+//                 "message":"User does not exist"
+//             }
+//             return reject(response);
+//         }
+//     })
+//     .catch(err => {
+//         response = {
+//             "status":"failed",
+//             "message":"Incorrect login credentials",
+//             "username": username,
+//             "user_id": null
+//         }
+//         console.error(err);
+//         return reject(response);
+//     })
   })
 };

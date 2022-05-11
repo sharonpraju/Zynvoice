@@ -5,6 +5,8 @@ const authRoute = require("./routes/authRoute");
 const stockRoute = require("./routes/stockRoute");
 const salesRoute = require("./routes/salesRoute");
 const settingsRoute = require("./routes/settingsRoute");
+const reportsRoute = require("./routes/reportsRoute");
+const dashboardRoute = require("./routes/dashboardRoute");
 const bodyParser = require("body-parser");;
 const db_conn = require('./db/db_conn');
 const jwt = require('jsonwebtoken');
@@ -49,3 +51,9 @@ app.use(salesRoute);
 
 //settings routes
 app.use(settingsRoute);
+
+//reports routes
+app.use(reportsRoute);
+
+//dashboard routes
+app.use(dashboardRoute);

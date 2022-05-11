@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
 const stock = require('../db/schema/stock');
 const jwt = require('jsonwebtoken');
+const dayjs = require('dayjs');
 
 var response;
-let date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+var date = dayjs().format('DD/MM/YYYY');
 
 exports.getStockModel = function() {
     return new Promise((resolve, reject)=>{
@@ -87,7 +87,7 @@ exports.addStockModel = function(token, barcode, landing_cost, low_quantity, nam
                             return reject(response);
                         });
                     }
-                }); 
+                });
             }
         })
         .catch(err => {

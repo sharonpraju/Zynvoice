@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const storeConfig = require('../db/schema/store-config');
 const users = require('../db/schema/users');

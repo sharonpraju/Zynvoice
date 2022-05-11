@@ -2,8 +2,8 @@ const express = require('express');
 const controller = require('../controllers/stockController');
 const router = express.Router();
 
-router.get('/get-stock',controller.getStockController);
-router.post('/add-stock',controller.addStockController);
-router.patch('/update-stock',controller.updateStockController);
-router.delete('/delete-stock',controller.deleteStockController);
+router.get('/stock/get',controller.getStockController);
+router.post('/stock/add',controller.addStockController);
+router.patch('/stock/update',controller.updateStockController);
+router.delete('/stock/delete',controller.deleteStockController);
 module.exports = router;

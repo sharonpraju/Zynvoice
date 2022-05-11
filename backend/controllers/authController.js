@@ -12,9 +12,7 @@ exports.authLoginController = function(req, res) {
 
 exports.authPasswordResetController = function(req, res) {
     var username = req.body.username;
-    var current_password = req.body.current_password;
-    var new_password = req.body.new_password;
-    authModel.authPasswordResetModel(username, current_password, new_password).then((message)=>{
+    authModel.authPasswordResetModel(username).then((message)=>{
         res.send(message);
     }).catch((error)=>{
         res.status(401).send(error);

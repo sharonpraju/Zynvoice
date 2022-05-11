@@ -2,9 +2,9 @@ const express = require('express');
 const controller = require('../controllers/salesController');
 const router = express.Router();
 
-router.get('/get-sales',controller.getSalesController);
-router.post('/add-sales',controller.addSalesController);
-router.patch('/update-sales',controller.updateSalesController);
-router.delete('/delete-sales',controller.deleteSalesController);
-router.delete('/delete-invoice',controller.deleteSalesController);
+router.get('/sales/get',controller.getSalesController);
+router.post('/sales/add',controller.addSalesController);
+router.patch('/sales/update',controller.updateSalesController);
+router.delete('/sales/delete',controller.deleteSalesController);
+router.delete('/sales/invoice/delete',controller.deleteSalesController);
 module.exports = router;
